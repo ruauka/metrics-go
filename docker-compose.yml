@@ -1,0 +1,50 @@
+version: "3.8"
+services:
+  metrics-service-1:
+    container_name: metrics-service-1
+    build:
+      context: ./metrics-service-1
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+
+  metrics-service-2:
+    container_name: metrics-service-2
+    build:
+      context: ./metrics-service-2
+      dockerfile: Dockerfile
+    ports:
+      - "8010:8000"
+
+  generator:
+    container_name: generator
+    build:
+      context: ./generator
+      dockerfile: Dockerfile
+    depends_on:
+      - metrics-service-1
+      - metrics-service-2
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - metrics-service-1
+      - metrics-service-2
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:8.5.3
+    volumes:
+      - ./grafana/config.ini:/etc/grafana/grafana.ini
+      - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/default.yml
+      - ./grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/default.yml
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
