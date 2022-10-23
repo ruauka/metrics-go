@@ -4,7 +4,7 @@ services:
     container_name: metrics-service-1
     build:
       context: ./metrics-service-1
-      dockerfile: Dockerfile
+      dockerfile: service1.Dockerfile
     ports:
       - "8000:8000"
 
@@ -12,7 +12,7 @@ services:
     container_name: metrics-service-2
     build:
       context: ./metrics-service-2
-      dockerfile: Dockerfile
+      dockerfile: service2.Dockerfile
     ports:
       - "8010:8000"
 
@@ -20,7 +20,7 @@ services:
     container_name: generator
     build:
       context: ./generator
-      dockerfile: Dockerfile
+      dockerfile: generator.Dockerfile
     depends_on:
       - metrics-service-1
       - metrics-service-2

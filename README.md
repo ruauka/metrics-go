@@ -22,7 +22,7 @@ make dockerstop
 ## Metrics
 To get metrics from each service manually you need to send a GET request to:
 1. Metrics-service-1 - http://localhost:8000/metrics
-2. Metrics-service-1 - http://localhost:8010/metrics
+2. Metrics-service-2 - http://localhost:8010/metrics
 
 Main metric -`requests_total`
 
