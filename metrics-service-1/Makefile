@@ -4,6 +4,9 @@ test:
 lint:
 	@golangci-lint run
 
+vendor:
+	go mod vendor
+
 bench:
 	go test -bench=BenchmarkExecute -benchmem -benchtime 5s -count=5
 

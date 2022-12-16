@@ -1,4 +1,4 @@
 dockerup:
-	docker-compose up -d --build --scale worker=4
+	docker-compose up -d --build
 dockerstop:
 	docker-compose stop
