@@ -6,4 +6,5 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o build/main ./main.go
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder ./app/build .
+COPY --from=builder ./app/data ./data
 CMD ["./main"]

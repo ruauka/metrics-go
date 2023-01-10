@@ -14,8 +14,9 @@ import (
 func FileOpen(path string) []byte {
 	data, err := ioutil.ReadFile(fmt.Sprintf("data/%s.json", path))
 	if err != nil {
-		fmt.Println(err)
+		log.Fatalln(err)
 	}
+
 	return data
 }
 
@@ -24,6 +25,7 @@ func req(service, path string) {
 	if err != nil {
 		log.Println(fmt.Sprintf("Сервис '%s' недоступен", service))
 	}
+
 	fmt.Println(fmt.Sprintf("%s - %d", service, resp.StatusCode))
 }
 
