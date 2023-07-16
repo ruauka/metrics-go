@@ -1,4 +1,4 @@
-## Project description
+## Overview
 This project is an example of tracking metrics of go services.
 
 The project consists of 5 microservices and each runs in a container in docker-compose:
